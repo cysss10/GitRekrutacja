@@ -1,0 +1,62 @@
+<?php
+
+namespace BlogBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="blog_comments")
+ */
+class Comments
+{
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $author;
+
+    /**
+     * @ORM\Column(type="text")
+     *
+     * @Assert\NotBlank
+     *
+     * @Assert\Length(
+     *      max = 1000
+     * )
+     */
+    private $content;
+
+    /**
+     * @ORM\Column(name="create_date", type="datetime")
+     */
+    private $createDate;
+
+    /**
+     * @ORM\ManyToOne(
+     *      targetEntity = "Posts",
+     *      inversedBy = "comments"
+     * )
+     *
+     * @ORM\JoinColumn(
+     *      name = "post_id",
+     *      referencedColumnName = "id",
+     *      nullable = false
+     * )
+     */
+    private $post;
+
+    /*    function __construct() {
+            $this->createDate = new \DateTime();
+        }*/
+}

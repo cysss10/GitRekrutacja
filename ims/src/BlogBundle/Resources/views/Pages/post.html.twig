@@ -1,0 +1,60 @@
+{% extends "BlogBundle:Pages:index.html.twig" %}
+
+
+
+{% block pageTitle %}{{ post.title }}{% endblock %}
+
+
+{% block topImage %}
+    <header class="intro-header" style="background-image: url('{{ asset('bundles/blog/img/image.jpg') }}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>{{ post.title }}</h1>
+                        <h2 class="subheading">{{ post.secondTitle }}</h2>
+                        <span class="meta">Posted by <a href="#">{{ post.author }}</a> on {{ post.createDate|date('M d, Y, H:i') }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+<!-- Main Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    {{ post.description }}
+                </div>
+            </div>
+        </div>
+    </article>
+    <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    {% form_theme commentForm 'BlogBundle:Form:form_template.html.twig' %}
+                    {{ form(commentForm) }}
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    {% for comment in post.comments %}
+                    <hr>
+                    <div class="post-preview">
+                            <h4 class="post-title">
+                                {{ comment.content }}
+                            </h4>
+                        <p class="post-meta">Posted by <a href="#">{{ comment.author }}</a> on {{ comment.createDate|date('M d, Y, H:i:s') }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+{% endblock %}

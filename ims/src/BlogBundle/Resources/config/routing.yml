@@ -1,0 +1,5 @@
+blog_pages:
+    resource: "@BlogBundle/Controller/MainController.php"
+    type: annotation
+    prefix:   /
+

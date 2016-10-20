@@ -1,0 +1,64 @@
+<?php
+
+
+namespace BlogBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use BlogBundle\Libs\Utils;
+
+
+/**
+ * @ORM\Entity(repositoryClass="BlogBundle\Repository\PostRepository")
+ * @ORM\Table(name="blog_posts")
+ * @ORM\HasLifecycleCallbacks
+ */
+class Posts
+{
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(name="title", type="string", length=120, unique=true)
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(name="second_title", type="string", length=150, nullable=true)
+     */
+    private $secondTitle;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(name="create_date", type="datetime")
+     */
+    private $createDate;
+
+
+    /**
+     * @ORM\Column(type="string", length=120, unique=true)
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $author;
+
+    /**
+     * @ORM\OneToMany(
+     *      targetEntity = "Comments",
+     *      mappedBy = "post"
+     * )
+     */
+    private $comments;
+
+}
